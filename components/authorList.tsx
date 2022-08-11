@@ -1,7 +1,7 @@
-export const AuthorList = ({authors}) => {
+export const AuthorList = ({authors}:any) => {
   
 
-  return authors.map((author, index) => {
+  return authors.map((author :any, index :any) => {
     return (
       <div key={index}>
         <ul>
@@ -9,7 +9,7 @@ export const AuthorList = ({authors}) => {
           <li>ID : {author.id}</li>
           <ul>
             Libros:
-            {author.books.map((book) => {
+            {author.books.map((book :any) => {
               return (
                 <div key={book.id}>
                   <li>Título : {book.title}</li>
