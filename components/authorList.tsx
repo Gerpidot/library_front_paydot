@@ -5,7 +5,7 @@ export const AuthorList = ({authors}:any) => {
     return (
       <div key={index}>
         <ul>
-          <li>Atutor : {author.fullName} </li>
+          <li>Autor : {author.fullName} </li>
           <li>ID : {author.id}</li>
           <ul>
             Libros:
