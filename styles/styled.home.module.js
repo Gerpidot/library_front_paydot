@@ -31,13 +31,14 @@ export const FormReg = styled.form`
   border: 5px solid gray;
   border-radius: 10px;
   background-color: rgba(77, 22, 61, 0.336);
+  
 `;
 
 export const Input = styled.input`
   width: 350px;
   height: 40px;
   padding: 4px;
-  color: rgba(250, 25, 25, 0.5);
+  color: rgba(250, 25, 25, );
   background: transparent;
   border: none;
   font-size: 18px;
@@ -47,7 +48,7 @@ export const Input = styled.input`
   /*sirve para que a la hora de seleccionar una opcion guardada no muestre color de fondo y el color de la letra sea parecida a la anterior  */
   transition: background-color 10000s ease-in-out 0s;
   box-shadow: 0 0 0px 1000px unset;
-  -webkit-text-fill-color: rgba(31, 27, 27, 0.705);
+  -webkit-text-fill-color: black;//color del input
 `;
 
 export const InputContainer = styled.div`
@@ -55,7 +56,7 @@ export const InputContainer = styled.div`
 `;
 
 export const Paragraph = styled.p`
-  color: black;
+  color: red;
   font-size: 12px;
   font-weight: bold;
 `;
@@ -84,7 +85,7 @@ export const LeftLabel = styled.label`
 export const RightLabel = styled.label`
   text-align: right;
   text-decoration: underline;
-  color: black;
+  color: red;
   cursor: pointer;
 `;
 
