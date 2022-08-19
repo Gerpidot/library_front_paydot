@@ -23,12 +23,13 @@ const registerSchema = Yup.object().shape({
     .email("El email no es correcto"),
 });
 
-const ForgotForm = ({setCurrent}) => {
-  const { sessionData, setSessionData } = useContext(SessionContext);
+const ForgotForm = ({setCurrent}:any) => {
+  const { sessionData, setSessionData } :any= useContext(SessionContext);
   const Router = useRouter();
 
   return (
     <div>
+      <br />
       <Formik
         initialValues={{
           email: "",
@@ -63,11 +64,19 @@ const ForgotForm = ({setCurrent}) => {
                     value={values.email}
                     onBlur={handleBlur("email")}
                   />
+                  <i className="bi bi-person-circle"></i>
                   {touched.email && errors.email && (
                     <Paragraph>{errors.email}</Paragraph>
                   )}
                 </InputContainer>
                 <DivForgot>
+                <Button
+                    onClick={() => {
+                      setCurrent(1);
+                    }}
+                  >
+                    Volver
+                  </Button>
                   <Button
                     type="submit"
                     onClick={() => {
@@ -83,26 +92,15 @@ const ForgotForm = ({setCurrent}) => {
                     Ingresar
                   </Button>
                 </DivForgot>
-                <div
-                  style={{
-                    width: "100%",
-                    display: "flex",
-                    justifyContent: "start",
-                  }}
-                >
-                  <LeftLabel
-                    onClick={() => {
-                      setCurrent(1);
-                    }}
-                  >
-                    Volver
-                  </LeftLabel>
-                </div>
+                
+                  
+                
               </FormReg>
             </>
           );
         }}
       </Formik>
+      <br />
     </div>
   );
 };

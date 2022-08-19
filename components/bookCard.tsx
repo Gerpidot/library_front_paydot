@@ -1,7 +1,8 @@
 import { BookCardProps } from "../models/bookCardProps";
 import { Book } from "../models/books";
 
-const BookCard = ({ book, available }) => {
+
+const BookCard = ({ book, available, putBookTookBook }:any) => {
   
 
   return (
@@ -10,7 +11,8 @@ const BookCard = ({ book, available }) => {
       <h4>id: {book.id}</h4>
       <h3>{book.author.fullName}</h3>
       <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-      <button>{available(book)}</button>
+      <button onClick={()=>putBookTookBook(book)}
+      >{available(book)}</button>
     </div>
   );
 };

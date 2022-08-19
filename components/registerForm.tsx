@@ -4,13 +4,16 @@ import * as Yup from "yup";
 import { RegisterData } from "../models/registerData";
 import { Register } from "../utils/mutations";
 import {
+  Mydiv,
   Button,
   FormReg,
   Input,
   InputContainer,
   Paragraph,
+  PointerImage,
   Titleh2,
 } from "../styles/styled.home.module";
+
 
 const registerSchema = Yup.object().shape({
   name: Yup.string()
@@ -31,7 +34,7 @@ const registerSchema = Yup.object().shape({
     .oneOf([Yup.ref("password")], "Las contraseñas no son iguales"),
 });
 
-const RegisterComponent = ({ setCurrent }) => {
+const RegisterComponent = ({ setCurrent }: any) => {
   const [registerData, setRegisterdata] = useState<RegisterData>({
     fullName: "",
     email: "",
@@ -40,7 +43,10 @@ const RegisterComponent = ({ setCurrent }) => {
   const [visible, setVisible] = useState(false);
 
   return (
-    <div>
+    <>
+    <br />
+      <Titleh2>Datos para el Registro</Titleh2>
+    <Mydiv>
       <Formik
         initialValues={{
           name: "",
@@ -76,7 +82,7 @@ const RegisterComponent = ({ setCurrent }) => {
           return (
             <>
               <FormReg action="POST" onSubmit={handleSubmit}>
-                <Titleh2>Formulario de Registro</Titleh2>
+                <div>
                 <InputContainer>
                   <Input
                     name="name"
@@ -84,10 +90,11 @@ const RegisterComponent = ({ setCurrent }) => {
                     onChange={handleChange("name")}
                     value={values.name}
                     onBlur={handleBlur("name")}
-                  />
+                    />
+                  <i className="bi bi-person-plus-fill"></i>
                   {touched.name && errors.name && (
                     <Paragraph>{errors.name}</Paragraph>
-                  )}
+                    )}
                   {/* Si lo toco al campo y hay algun error, lo manda */}
                 </InputContainer>
 
@@ -98,11 +105,15 @@ const RegisterComponent = ({ setCurrent }) => {
                     onChange={handleChange("email")}
                     value={values.email}
                     onBlur={handleBlur("email")}
-                  />
+                    />
+                  <i className="bi bi-person-circle"></i>
                   {touched.email && errors.email && (
                     <Paragraph>{errors.email}</Paragraph>
-                  )}
+                    )}
                 </InputContainer>
+                    </div>
+                <div>
+
                 <InputContainer>
                   <Input
                     name="password"
@@ -111,10 +122,18 @@ const RegisterComponent = ({ setCurrent }) => {
                     value={values.password}
                     type={visible ? "text" : "password"}
                     onBlur={handleBlur("password")}
-                  />
+                    />
+                  <PointerImage onClick={() => setVisible(!visible)}>
+                    {visible ? (
+                      <i className="bi bi-unlock-fill"></i>
+                      ) : (
+                        <i className="bi bi-lock-fill"></i>
+                        )}
+                  </PointerImage>
+
                   {touched.password && errors.password && (
                     <Paragraph>{errors.password}</Paragraph>
-                  )}
+                    )}
                 </InputContainer>
                 <InputContainer>
                   <Input
@@ -124,21 +143,28 @@ const RegisterComponent = ({ setCurrent }) => {
                     value={values.repeatPassword}
                     type={visible ? "text" : "password"}
                     onBlur={handleBlur("repeatPassword")}
-                  />
+                    />
+                  <PointerImage onClick={() => setVisible(!visible)}>
+                    {visible ? (
+                      <i className="bi bi-unlock-fill"></i>
+                      ) : (
+                        <i className="bi bi-lock-fill"></i>
+                        )}
+                  </PointerImage>
                   {touched.repeatPassword && errors.repeatPassword && (
                     <Paragraph>{errors.repeatPassword}</Paragraph>
-                  )}
+                    )}
                 </InputContainer>
+               
+                  </div>
                 <div>
-                  <Button
-                    type="button"
-                    className="btn btn-primary"
-                    onClick={() => setVisible(!visible)}
+                <Button
+                    onClick={() => {
+                      setCurrent(1);
+                    }}
                   >
-                    {visible ? "Ocultar contraseña" : "Mostrar contraseña"}
+                    Volver
                   </Button>
-                </div>
-                <div>
                   <Button
                     type="submit"
                     onClick={() => {
@@ -147,7 +173,6 @@ const RegisterComponent = ({ setCurrent }) => {
                         email: values.email,
                         password: values.password,
                       });
-                      
                     }}
                   >
                     Registrarse
@@ -158,7 +183,9 @@ const RegisterComponent = ({ setCurrent }) => {
           );
         }}
       </Formik>
-    </div>
+      <br />
+    </Mydiv>
+    </>
   );
 };
 

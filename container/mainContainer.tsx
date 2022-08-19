@@ -3,12 +3,14 @@ import BookCard from "../components/bookCard";
 import { SessionContext } from "../context/sessionProvider";
 import SessionData from "../models/sessionData";
 import { Button, Input } from "../styles/styled.home.module";
+import { tookOrPutAbook } from "../utils/mutations";
 import {
   AuthorListContainer,
   AuthorListStyled,
 } from "../styles/styled.authorlist";
 
 import {
+  filterByTitle,
   getAllAuthor,
   getAllBooks,
   getAuthorById,
@@ -17,6 +19,7 @@ import {
 import { BookCardDiv, DivContainer } from "../styles/styled.bookCard.js";
 import { AuthorList } from "../components/authorList";
 import withAuth from "../utils/hoc";
+import { Book } from "../models/books";
 
 const MainContainer = () => {
   const mockData = [
@@ -47,7 +50,7 @@ const MainContainer = () => {
       ],
     },
   ];
-  const { sessionData, setSessionData } = useContext(SessionContext);
+  const { sessionData, setSessionData }: any = useContext(SessionContext);
 
   const [selected, setSelected] = useState(0);
   const [books, setBooks] = useState(mockData);
@@ -60,7 +63,7 @@ const MainContainer = () => {
     "3": getAuthorById,
   };
   let idInput: number;
-
+  let idSuspenso;
   const argumentTransform = () => {
     const querySelected = queries[selected + ""];
 
@@ -96,10 +99,21 @@ const MainContainer = () => {
       return;
     }
   };
-  const available = (books) => {
+  const available = (books: any) => {
     const valor = books.isBorrowed ? "Prestado" : "Disponible";
 
     return valor;
+  };
+  const putBookTookBook = async (books: Book) => {
+    const value = books.isBorrowed;
+    if (!value) {
+      await tookOrPutAbook(sessionData, books, !value);
+      console.log("pedir libro", sessionData, books, value);
+    } else {
+      await tookOrPutAbook(sessionData, books, !value);
+      console.log("devolver libro", sessionData, books, value);
+    }
+    selectedQuery();
   };
   const hidden = () => {
     if (selected == 0 || selected == 2) {
@@ -132,11 +146,31 @@ const MainContainer = () => {
             min={1}
             hidden={hidden()}
             onChange={(event) => {
-              idInput = event.target.value;
+              idSuspenso = event.target.value;
+              idInput = parseInt(idSuspenso);
               console.log(idInput);
             }}
             placeholder="iD del Libro"
             required
+          />
+        </div>
+        <div>
+          <input
+            type="text"
+            id="searchByTitle"
+            placeholder="Filtrar por título"
+            onChange={async (event) => {
+              let title = event.target.value;
+
+              const response = await filterByTitle(sessionData, title);
+              if (response.data === null) {
+                return;
+              }
+
+              setBooks(await response);
+
+              return;
+            }}
           />
         </div>
         <div>
@@ -155,14 +189,17 @@ const MainContainer = () => {
         {books.map((book, index) => {
           return (
             <BookCardDiv key={index} hidden={isHidden}>
-              <BookCard book={book} available={available} />
+              <BookCard
+                book={book}
+                available={available}
+                putBookTookBook={putBookTookBook}
+              />
             </BookCardDiv>
           );
         })}
       </DivContainer>
       <AuthorListContainer>
         <AuthorListStyled hidden={!isHidden}>
-          <h2>Autor Destacado</h2>
           <AuthorList authors={authors} />
         </AuthorListStyled>
       </AuthorListContainer>

@@ -1,6 +1,8 @@
 
+
 import { RegisterData } from "../models/registerData";
 import  SessionData  from "../models/sessionData";
+import {Book} from "../models/books"
 
 const URL="https://testgermanpidote.herokuapp.com/graphql";
 export const Register = async (registerData: RegisterData) => {
@@ -10,6 +12,7 @@ export const Register = async (registerData: RegisterData) => {
       headers: {
         "Content-Type": "application/json",
         Accept: "application/json",
+        
       },
       body: JSON.stringify({
         query: `mutation{register(input:{fullName:"${registerData.fullName}",email:"${registerData.email}", password:"${registerData.password}"})
@@ -113,4 +116,35 @@ export const updateAuthorByID=()=>{
 
 export const deleteAuthorByID=()=>{
   
+}
+
+export const tookOrPutAbook=async (sessionData:SessionData,book:Book,check:boolean)=>{
+  try {
+    
+    const response = await fetch(URL, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+        Authorization: "Bearer " + sessionData.jwt,
+      },
+      body: JSON.stringify({
+        query: `mutation{putTookBookById(input:{id:${book.id}} input2:{isBorrowed:${check} borrowedTo:"${sessionData.email}"})}`,
+      }),
+    });
+    const jsonResponse = await response.json();
+    //console.log(jsonResponse);
+    //a modo de prueba lo siguiente.... reever o borrar segun buenas practicas
+    if (jsonResponse.data == null) {
+      alert(jsonResponse.errors[0].message);
+      return false;
+    } else {
+      if(check){alert(`El libro ${book.title} se prestó correctamente`)}
+      else{alert(`El libro ${book.title} se devolvió correctamente`)}
+      
+      return true;
+    }
+  } catch (e) {
+    throw new Error("Error en prestar o pedir libro");
+  }
 }

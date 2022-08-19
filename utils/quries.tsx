@@ -47,7 +47,8 @@ export const getBookByID = async (id: number, sessionData: SessionData) => {
       },
       body: JSON.stringify({
         query: `{ getBookByID(input:{id:${id}})
-        {title
+        {id
+          title
           isBorrowed
           author{id 
             fullName 
@@ -84,7 +85,7 @@ export const getAllAuthor = async (sessionData: SessionData) => {
       },
       body: JSON.stringify({
         query:
-          "{ getAllAuthor{id fullName books{title id isBorrowed borrowedAt}}}",
+          "{ getAllAuthor{id fullName books{title id isBorrowed borrowedAt borrowedTo}}}",
       }),
     });
     const jsonResponse = await response.json();
@@ -127,5 +128,44 @@ export const getAuthorById = async (id: number, sessionData: SessionData) => {
     }
   } catch (e) {
     throw new Error("No se encontró el autor");
+  }
+};
+
+export const filterByTitle = async (
+  sessionData: SessionData,
+  input: string
+) => {
+  try {
+    const response = await fetch(url, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+        Authorization: "Bearer " + sessionData.jwt,
+      },
+      body: JSON.stringify({
+        query: `{searchByTitle(input:{title:"${input}"}){
+          borrowedAt
+          id
+          title
+          author {id
+                  fullName
+                  }
+          isBorrowed
+          borrowedTo
+          borrowedAt
+        }}`,
+      }),
+    });
+    const jsonResponse = await response.json();
+    if (jsonResponse.data == null) {
+      //console.log(jsonResponse.errors[0].message);
+      return jsonResponse;
+    } else {
+      //console.log(jsonResponse.data.searchByTitle);
+      return jsonResponse.data.searchByTitle;
+    }
+  } catch (e) {
+    throw new Error("No se encontró el libro");
   }
 };

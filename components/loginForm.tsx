@@ -7,21 +7,17 @@ import {
   FormReg,
   Input,
   InputContainer,
-  LeftLabel,
+  Mydiv,
   Paragraph,
   RightLabel,
   Titleh2,
 } from "../styles/styled.home.module";
-import SessionData from "../models/sessionData";
+
 import { useContext } from "react";
 import { SessionContext } from "../context/sessionProvider";
 import { Login } from "../utils/mutations";
-import { url } from "inspector";
-import { NextResponse } from "next/server";
-import MainContainer from "../container/mainContainer";
 import { useRouter } from "next/router";
-import Link from "next/link";
-import ForgotForm from "./forgotForm";
+
 
 const registerSchema = Yup.object().shape({
   email: Yup.string()
@@ -31,18 +27,20 @@ const registerSchema = Yup.object().shape({
     .required("Este dato es obligatorio")
     .min(8, "Debe tener al menos 8 caracteres")
     .matches(
-      /(^(?=.*[A-Z])(?=.*[a-z])(?=.*[!@#$%^&*? ]).*$)/,
+      /(^(?=.*[A-Z])(?=.*[a-z])(?=.*[!@#$%^&*_<>,.| ]).*$)/,
       "Al menos 1 mayúscula, minúscula y caracter"
     ),
 });
 
-const LoginForm = ({ setCurrent }) => {
+const LoginForm = ({ setCurrent }: any) => {
   const [visible, setVisible] = useState(false);
-  const { sessionData, setSessionData } = useContext(SessionContext);
-  const [setIsLoggedIn] = useState(false);
-  const Router = useRouter();
+  const { sessionData, setSessionData }: any = useContext(SessionContext);
+ const Router = useRouter();
   return (
-    <div>
+    <>
+    <br />
+    <Titleh2>Iniciar Sesión</Titleh2>
+    <Mydiv>
       <Formik
         initialValues={{
           email: "",
@@ -81,8 +79,6 @@ const LoginForm = ({ setCurrent }) => {
           return (
             <>
               <FormReg action="POST" onSubmit={handleSubmit}>
-                <Titleh2>Iniciar Sesión</Titleh2>
-
                 <InputContainer>
                   <Input
                     name="email"
@@ -90,10 +86,11 @@ const LoginForm = ({ setCurrent }) => {
                     onChange={handleChange("email")}
                     value={values.email}
                     onBlur={handleBlur("email")}
-                  />
+                    />
+                  <i className="bi bi-person-circle"></i>
                   {touched.email && errors.email && (
                     <Paragraph>{errors.email}</Paragraph>
-                  )}
+                    )}
                 </InputContainer>
                 <InputContainer>
                   <Input
@@ -103,21 +100,20 @@ const LoginForm = ({ setCurrent }) => {
                     value={values.password}
                     type={visible ? "text" : "password"}
                     onBlur={handleBlur("password")}
-                  />
+                    />
+                  <i id="showHide" onClick={() => setVisible(!visible)}>
+                    {visible ? (
+                      <i className="bi bi-eye-fill"></i>
+                      ) : (
+                        <i className="bi bi-eye-slash-fill"></i>
+                        )}
+                  </i>
+
                   {touched.password && errors.password && (
                     <Paragraph>{errors.password}</Paragraph>
-                  )}
+                    )}
                 </InputContainer>
 
-                <div>
-                  <Button
-                    type="button"
-                    className="btn btn-primary"
-                    onClick={() => setVisible(!visible)}
-                  >
-                    {visible ? "Ocultar contraseña" : "Mostrar contraseña"}
-                  </Button>
-                </div>
                 <DivForgot>
                   <Button
                     type="submit"
@@ -129,30 +125,16 @@ const LoginForm = ({ setCurrent }) => {
                         isLoggedIn: false,
                       })
                     }
-                  >
+                    >
                     Ingresar
                   </Button>
                 </DivForgot>
-                <div
-                  style={{
-                    width: "100%",
-                    display: "flex",
-                    justifyContent: "space-around",
-                  }}
-                >
-                  <LeftLabel
-                    onClick={() => {
-                      setCurrent(0);
-                    }}
-                  >
-                    Volver
-                  </LeftLabel>
-
+                <div>
                   <RightLabel
                     onClick={() => {
                       setCurrent(2);
                     }}
-                  >
+                    >
                     Olvidó su contraseña?
                   </RightLabel>
                 </div>
@@ -160,8 +142,11 @@ const LoginForm = ({ setCurrent }) => {
             </>
           );
         }}
+        
       </Formik>
-    </div>
+      <br />
+      </Mydiv>
+    </>
   );
 };
 

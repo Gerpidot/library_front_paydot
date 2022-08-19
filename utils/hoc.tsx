@@ -5,7 +5,8 @@ import LoginForm from "../components/loginForm";
 import RegisterComponent from "../components/registerForm";
 import { SessionContext } from "../context/sessionProvider";
 
-function withAuth<T>(Component: NextComponentType<T>, setCurrent: any) {
+function withAuth<T>(Component: NextComponentType<T>) //setCurrent: any) 
+{
   const Auth = (props: T) => {
     // Login data added to props
     const { sessionData }: any = useContext(SessionContext);
