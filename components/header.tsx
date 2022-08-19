@@ -5,14 +5,14 @@ import {
   DivVar,
   HButton,
 } from "../styles/styled.header.module";
-import logo from "../resources/logo.png";
+//import logo from "../resources/logo.png";
 
 const Header = ({ setCurrent }: any) => {
   return (
     <div>
       <DivContainer>
         <DivLogo>
-          <Image src={logo} alt="logo" width={100} height={150} />
+          
         </DivLogo>
 
         <div className="container">
