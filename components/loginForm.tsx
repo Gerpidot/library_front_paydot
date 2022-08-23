@@ -62,7 +62,7 @@ const LoginForm = ({ setCurrent }: any) => {
           } else {
             sessionData.isLoggedIn = true;
             setSessionData(sessionData);
-            console.log(sessionData);
+           // console.log(sessionData);
             Router.push("/library");
             return;
           }

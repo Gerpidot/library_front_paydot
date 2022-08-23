@@ -21,10 +21,10 @@ export const getAllBooks = async (sessionData: SessionData) => {
     const response = await fetch(url, fetchData(sessionData));
     const jsonResponse = await response.json();
     if (jsonResponse.data == null) {
-      console.log(jsonResponse.errors[0].message);
+      // console.log(jsonResponse.errors[0].message);
       return jsonResponse;
     } else {
-      console.log(jsonResponse.data.getAllBooks);
+      //  console.log(jsonResponse.data.getAllBooks);
       return jsonResponse.data.getAllBooks;
     }
   } catch (e) {
@@ -63,10 +63,10 @@ export const getBookByID = async (id: number, sessionData: SessionData) => {
     });
     const jsonResponse = await response.json();
     if (jsonResponse.data == null) {
-      console.log(jsonResponse.errors[0].message);
+      //  console.log(jsonResponse.errors[0].message);
       return jsonResponse;
     } else {
-      console.log(jsonResponse.data.getBookByID);
+      // console.log(jsonResponse.data.getBookByID);
       return [jsonResponse.data.getBookByID];
     }
   } catch (e) {
@@ -90,10 +90,10 @@ export const getAllAuthor = async (sessionData: SessionData) => {
     });
     const jsonResponse = await response.json();
     if (jsonResponse.data == null) {
-      console.log(jsonResponse.errors[0].message);
+      // console.log(jsonResponse.errors[0].message);
       return jsonResponse;
     } else {
-      console.log(jsonResponse.data.getAllAuthor);
+      //console.log(jsonResponse.data.getAllAuthor);
       return jsonResponse.data.getAllAuthor;
     }
   } catch (e) {
@@ -120,10 +120,10 @@ export const getAuthorById = async (id: number, sessionData: SessionData) => {
     });
     const jsonResponse = await response.json();
     if (jsonResponse.data == null) {
-      console.log(jsonResponse.errors[0].message);
+      // console.log(jsonResponse.errors[0].message);
       return jsonResponse;
     } else {
-      console.log(jsonResponse.data.getOneAuthor);
+      //  console.log(jsonResponse.data.getOneAuthor);
       return [jsonResponse.data.getOneAuthor];
     }
   } catch (e) {

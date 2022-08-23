@@ -16,15 +16,14 @@ import { SessionContext } from "../context/sessionProvider";
 import { forgotPassword } from "../utils/mutations";
 import { useRouter } from "next/router";
 
-
 const registerSchema = Yup.object().shape({
   email: Yup.string()
     .required("Este dato es obligatorio")
     .email("El email no es correcto"),
 });
 
-const ForgotForm = ({setCurrent}:any) => {
-  const { sessionData, setSessionData } :any= useContext(SessionContext);
+const ForgotForm = ({ setCurrent }: any) => {
+  const { sessionData, setSessionData }: any = useContext(SessionContext);
   const Router = useRouter();
 
   return (
@@ -39,10 +38,10 @@ const ForgotForm = ({setCurrent}:any) => {
         validateOnBlur
         //validateOnSubmit
         onSubmit={async () => {
-          console.log(sessionData.email);
+          // console.log(sessionData.email);
           await forgotPassword(sessionData);
         }}
-        >
+      >
         {({
           handleBlur,
           handleChange,
@@ -53,51 +52,46 @@ const ForgotForm = ({setCurrent}:any) => {
         }) => {
           return (
             <>
-                <Titleh2>Recuperar Contraseña</Titleh2>
-                <Mydiv>
-              <FormReg action="POST" onSubmit={handleSubmit}>
-
-                <InputContainer>
-                  <Input
-                    name="email"
-                    placeholder="Ingrese su email"
-                    onChange={handleChange("email")}
-                    value={values.email}
-                    onBlur={handleBlur("email")}
+              <Titleh2>Recuperar Contraseña</Titleh2>
+              <Mydiv>
+                <FormReg action="POST" onSubmit={handleSubmit}>
+                  <InputContainer>
+                    <Input
+                      name="email"
+                      placeholder="Ingrese su email"
+                      onChange={handleChange("email")}
+                      value={values.email}
+                      onBlur={handleBlur("email")}
                     />
-                  <i className="bi bi-person-circle"></i>
-                  {touched.email && errors.email && (
-                    <Paragraph>{errors.email}</Paragraph>
+                    <i className="bi bi-person-circle"></i>
+                    {touched.email && errors.email && (
+                      <Paragraph>{errors.email}</Paragraph>
                     )}
-                </InputContainer>
-                <DivForgot>
-                <Button
-                    onClick={() => {
-                      setCurrent(1);
-                    }}
-                    >
-                    Volver
-                  </Button>
-                  <Button
-                    type="submit"
-                    onClick={() => {
-                      setSessionData({
-                        email: values.email,
-                        password: "",
-                        jwt: "",
-                        isLoggedIn: false,
-                      }),
-                        console.log(sessionData.email);
+                  </InputContainer>
+                  <DivForgot>
+                    <Button
+                      onClick={() => {
+                        setCurrent(1);
                       }}
-                      >
-                    Ingresar
-                  </Button>
-                </DivForgot>
-                
-                  
-                
-              </FormReg>
-</Mydiv>
+                    >
+                      Volver
+                    </Button>
+                    <Button
+                      type="submit"
+                      onClick={() => {
+                        setSessionData({
+                          email: values.email,
+                          password: "",
+                          jwt: "",
+                          isLoggedIn: false,
+                        });
+                      }}
+                    >
+                      Ingresar
+                    </Button>
+                  </DivForgot>
+                </FormReg>
+              </Mydiv>
             </>
           );
         }}

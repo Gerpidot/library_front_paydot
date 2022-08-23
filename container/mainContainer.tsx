@@ -66,7 +66,7 @@ const MainContainer = () => {
   const [searchKey, setSearchKey] = useState("");
   useEffect(() => {
     //actualiza el valor de serachKEy
-    console.log(searchKey);
+    //console.log(searchKey);
   }, [searchKey]);
   /* const queries = {
     "0": getAllBooks,
@@ -180,7 +180,7 @@ const MainContainer = () => {
                 placeholder="¿Que estás buscando?"
                 onChange={async (event: any) => {
                   setSearchKey(event.target.value);
-                  console.log(searchKey);
+                 // console.log(searchKey);
                   return;
                 }}
               />

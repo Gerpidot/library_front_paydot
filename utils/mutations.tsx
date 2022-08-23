@@ -20,7 +20,7 @@ export const Register = async (registerData: RegisterData) => {
       }),
     });
     const jsonResponse = await response.json();
-    console.log(jsonResponse);
+   // console.log(jsonResponse);
     //a modo de prueba lo siguiente.... reever o borrar segun buenas practicas
     if (jsonResponse.data == null) {
       alert(jsonResponse.errors[0].message);
