@@ -7,11 +7,12 @@ export const Title = styled.h1`
   margin: 0px;
 `;
 
-export const DivContainer = styled.div`
+export const DivHeaderContainer = styled.div`
   display: flex;
-  height: 100px;
+  
+  height: 120px;
   width: 100%;
-  background: rgba(9, 93, 89, 0.8);
+  background: rgba(0, 0, 0, 0.8);
   margin: 0%;
   padding: 0%;
   //border: 1px black solid;
@@ -22,17 +23,18 @@ export const DivVar= styled.div`
   display: flex;
   height: 40px;
   width: 100%;
-  background: rgba(9, 93, 89, 0.8);
-  margin: 0%;
+  //background: rgba(9, 93, 89, 0.8);
+  margin-top: 15px;
   padding: 0%;
   border-radius: 0px 0px 10px 0px;
   `
 
 export const DivLogo = styled.div`
-  margin: 0%;
-  padding-left:20px;
+  
+ 
 height:100%;
-  width: 100px;
+  width:200;
+ 
 `;
 
 export const HButton = styled.button`
@@ -52,5 +54,8 @@ export const HButton = styled.button`
 ;
   }
 `;
-
+//Controla el tamañ abusivo del titulo animado
+export const MyDivTest=styled.div`
+width:auto;
+`
 

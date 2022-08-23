@@ -10,7 +10,7 @@ export const BookCardDiv = styled.div`
   background: rgba(12, 165, 94, 0.87);
 `;
 
-export const DivContainer = styled.div`
+export const DivCardContainer = styled.div`
   display: flex;
   flex-direction: columm;
   justify-content: center;
@@ -18,4 +18,5 @@ export const DivContainer = styled.div`
   align-content: center;
   width:100%;
   flex-wrap:wrap;
+  height:auto;
 `;

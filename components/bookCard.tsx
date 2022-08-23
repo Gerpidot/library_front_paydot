@@ -1,18 +1,19 @@
-import { BookCardProps } from "../models/bookCardProps";
-import { Book } from "../models/books";
 
 
-const BookCard = ({ book, available, putBookTookBook }:any) => {
-  
-
+const BookCard = ({ book, available, putBookTookBook }: any) => {
   return (
     <div>
       <h1>{book.title}</h1>
       <h4>id: {book.id}</h4>
       <h3>{book.author.fullName}</h3>
       <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-      <button onClick={()=>putBookTookBook(book)}
-      >{available(book)}</button>
+      <button
+        onClick={async () => {
+          await putBookTookBook(book);
+        }}
+      >
+        {available(book)}
+      </button>
     </div>
   );
 };

@@ -7,7 +7,7 @@ import {
   FormReg,
   Input,
   InputContainer,
-  LeftLabel,
+  Mydiv,
   Paragraph,
   Titleh2,
 } from "../styles/styled.home.module";
@@ -15,7 +15,7 @@ import { useContext } from "react";
 import { SessionContext } from "../context/sessionProvider";
 import { forgotPassword } from "../utils/mutations";
 import { useRouter } from "next/router";
-import Link from "next/link";
+
 
 const registerSchema = Yup.object().shape({
   email: Yup.string()
@@ -42,7 +42,7 @@ const ForgotForm = ({setCurrent}:any) => {
           console.log(sessionData.email);
           await forgotPassword(sessionData);
         }}
-      >
+        >
         {({
           handleBlur,
           handleChange,
@@ -53,8 +53,9 @@ const ForgotForm = ({setCurrent}:any) => {
         }) => {
           return (
             <>
-              <FormReg action="POST" onSubmit={handleSubmit}>
                 <Titleh2>Recuperar Contraseña</Titleh2>
+                <Mydiv>
+              <FormReg action="POST" onSubmit={handleSubmit}>
 
                 <InputContainer>
                   <Input
@@ -63,18 +64,18 @@ const ForgotForm = ({setCurrent}:any) => {
                     onChange={handleChange("email")}
                     value={values.email}
                     onBlur={handleBlur("email")}
-                  />
+                    />
                   <i className="bi bi-person-circle"></i>
                   {touched.email && errors.email && (
                     <Paragraph>{errors.email}</Paragraph>
-                  )}
+                    )}
                 </InputContainer>
                 <DivForgot>
                 <Button
                     onClick={() => {
                       setCurrent(1);
                     }}
-                  >
+                    >
                     Volver
                   </Button>
                   <Button
@@ -87,8 +88,8 @@ const ForgotForm = ({setCurrent}:any) => {
                         isLoggedIn: false,
                       }),
                         console.log(sessionData.email);
-                    }}
-                  >
+                      }}
+                      >
                     Ingresar
                   </Button>
                 </DivForgot>
@@ -96,6 +97,7 @@ const ForgotForm = ({setCurrent}:any) => {
                   
                 
               </FormReg>
+</Mydiv>
             </>
           );
         }}

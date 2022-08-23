@@ -82,6 +82,7 @@ const LoginForm = ({ setCurrent }: any) => {
                 <InputContainer>
                   <Input
                     name="email"
+                    type="email"
                     placeholder="Ingrese su email"
                     onChange={handleChange("email")}
                     value={values.email}

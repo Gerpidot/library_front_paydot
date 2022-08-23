@@ -30,15 +30,14 @@ export const FormReg = styled.form`
   margin: auto;
   border: 5px solid gray;
   border-radius: 10px;
-  background-color: rgba(77, 22, 61, 0.336);
-  
+  background-color: rgba(77, 22, 61, 0.936);
 `;
 
 export const Input = styled.input`
   width: 350px;
   height: 40px;
   padding: 4px;
-  color: rgba(250, 25, 25, );
+  color: rgba(250, 25, 25);
   background: transparent;
   border: none;
   font-size: 18px;
@@ -48,7 +47,7 @@ export const Input = styled.input`
   /*sirve para que a la hora de seleccionar una opcion guardada no muestre color de fondo y el color de la letra sea parecida a la anterior  */
   transition: background-color 10000s ease-in-out 0s;
   box-shadow: 0 0 0px 1000px unset;
-  -webkit-text-fill-color: black;//color del input
+  -webkit-text-fill-color: yellowgreen; //color del input
 `;
 
 export const InputContainer = styled.div`
@@ -56,7 +55,7 @@ export const InputContainer = styled.div`
 `;
 
 export const Paragraph = styled.p`
-  color: red;
+  color: green;
   font-size: 12px;
   font-weight: bold;
 `;
@@ -85,7 +84,7 @@ export const LeftLabel = styled.label`
 export const RightLabel = styled.label`
   text-align: right;
   text-decoration: underline;
-  color: red;
+  color: yellowgreen;
   cursor: pointer;
 `;
 
@@ -99,4 +98,49 @@ export const Mydiv = styled.div`
   height: 400px;
   flex-wrap: wrap;
   align-content: flex-start;
+`;
+//navBarIndext.tsx
+export const DivVar = styled.div`
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 190px;
+  //background: rgba(9, 93, 89, 0.8);
+  margin-top: 0px;
+  padding: 0%;
+  border-radius: 0px 0px 10px 0px;
+`;
+
+export const HButton = styled.button`
+  background: #fdb731;
+  border: 1px #fdb731 solid;
+  //border-radius: 5px;
+  margin: 0px;
+  cursor: pointer;
+  width: 190px;
+  height: 80px;
+  text-transform: uppercase;
+  &:hover {
+    background: #4d163d;
+    border: 1px #4d163d solid;
+  }
+  &:active {
+    background: #bd0034;
+  }
+`;
+
+//Index.tsx
+
+export const ContainerDiv = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  height: 450px;
+  width: 100%;
+`;
+
+export const EmptyDivSeparator = styled.div`
+  width: 190px;
+  height: 100%;
+  background: #fdb731;
 `;

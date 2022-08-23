@@ -1,8 +1,7 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import BookCard from "../components/bookCard";
 import { SessionContext } from "../context/sessionProvider";
-import SessionData from "../models/sessionData";
-import { Button, Input } from "../styles/styled.home.module";
+
 import { tookOrPutAbook } from "../utils/mutations";
 import {
   AuthorListContainer,
@@ -16,10 +15,18 @@ import {
   getAuthorById,
   getBookByID,
 } from "../utils/quries";
-import { BookCardDiv, DivContainer } from "../styles/styled.bookCard.js";
+import { BookCardDiv, DivCardContainer } from "../styles/styled.bookCard.js";
 import { AuthorList } from "../components/authorList";
 import withAuth from "../utils/hoc";
 import { Book } from "../models/books";
+import {
+  DivMainContainer,
+  DivMainMenu,
+  SearchBarInput,
+  MyForm,
+  BtnSearch,
+  Button,
+} from "../styles/styled.main.module";
 
 const MainContainer = () => {
   const mockData = [
@@ -56,7 +63,12 @@ const MainContainer = () => {
   const [books, setBooks] = useState(mockData);
   const [authors, setAuthors] = useState(mockAuthor);
   const [isHidden, setIsHidden] = useState(false);
-  const queries = {
+  const [searchKey, setSearchKey] = useState("");
+  useEffect(() => {
+    //actualiza el valor de serachKEy
+    console.log(searchKey);
+  }, [searchKey]);
+  /* const queries = {
     "0": getAllBooks,
     "1": getBookByID,
     "2": getAllAuthor,
@@ -66,8 +78,8 @@ const MainContainer = () => {
   let idSuspenso;
   const argumentTransform = () => {
     const querySelected = queries[selected + ""];
-
-    if (hidden() == true) {
+*/
+  /*if (hidden() == true) {
       console.log("idinput falsy");
       return querySelected(sessionData);
     } else if (hidden() == false && idInput) {
@@ -77,9 +89,9 @@ const MainContainer = () => {
     } else {
       return;
     }
-  };
+  };*/
 
-  const selectedQuery = async () => {
+  /* const selectedQuery = async () => {
     const selectedQuery = await argumentTransform();
     const serverResponse = await selectedQuery;
     if (!serverResponse) {
@@ -98,7 +110,7 @@ const MainContainer = () => {
       setAuthors(await serverResponse);
       return;
     }
-  };
+  };*/
   const available = (books: any) => {
     const valor = books.isBorrowed ? "Prestado" : "Disponible";
 
@@ -108,12 +120,17 @@ const MainContainer = () => {
     const value = books.isBorrowed;
     if (!value) {
       await tookOrPutAbook(sessionData, books, !value);
-      console.log("pedir libro", sessionData, books, value);
+     available(books.isBorrowed)
+     const serverResponse = await getAllBooks(sessionData);
+     setBooks(serverResponse);
+      //console.log("pedir libro", sessionData, books, value);
     } else {
       await tookOrPutAbook(sessionData, books, !value);
-      console.log("devolver libro", sessionData, books, value);
+      const serverResponse = await getAllBooks(sessionData);
+      setBooks(serverResponse);
+     // console.log("devolver libro", sessionData, books, value);
     }
-    selectedQuery();
+    //selectedQuery(); Corregir acá
   };
   const hidden = () => {
     if (selected == 0 || selected == 2) {
@@ -124,68 +141,92 @@ const MainContainer = () => {
   };
 
   return (
-    <div>
-      <h1>Soy la main</h1>
-
-      <label> Tipo de busqueda </label>
-      <form>
-        <select
-          onChange={(event: any) => {
-            setSelected(event.target.value);
-          }}
-        >
-          <option value={0}>Buscar todos los libros</option>
-          <option value={1}>Buscar libro por su Id</option>
-          <option value={2}>Buscar todos los autores</option>
-          <option value={3}>Buscar autor por Id</option>
-        </select>
-        <div>
-          <input
-            id="inputId"
-            type="number"
-            min={1}
-            hidden={hidden()}
-            onChange={(event) => {
-              idSuspenso = event.target.value;
-              idInput = parseInt(idSuspenso);
-              console.log(idInput);
-            }}
-            placeholder="iD del Libro"
-            required
-          />
-        </div>
-        <div>
-          <input
-            type="text"
-            id="searchByTitle"
-            placeholder="Filtrar por título"
-            onChange={async (event) => {
-              let title = event.target.value;
-
-              const response = await filterByTitle(sessionData, title);
-              if (response.data === null) {
-                return;
-              }
-
-              setBooks(await response);
-
-              return;
-            }}
-          />
-        </div>
-        <div>
-          <button
-            type="button"
-            onClick={() => {
-              selectedQuery();
+    <DivMainContainer>
+      <DivMainMenu>
+        <form>
+          {/* <select
+            onChange={(event: any) => {
+              setSelected(event.target.value);
             }}
           >
-            Buscar
-          </button>
-        </div>
-      </form>
+            <option value={0}>Buscar todos los libros</option>
+            <option value={1}>Buscar libro por su Id</option>
+            <option value={2}>Buscar todos los autores</option>
+            <option value={3}>Buscar autor por Id</option>
+          </select>
+          <div>
+            <input
+              id="inputId"
+              type="number"
+              min={1}
+              hidden={hidden()}
+              onChange={(event) => {
+                idSuspenso = event.target.value;
+                idInput = parseInt(idSuspenso);
+                console.log(idInput);
+              }}
+              placeholder="iD del Libro"
+              required
+            />
+            </div>*/}
+          <div>
+            <MyForm
+              action="
+          "
+            >
+              <SearchBarInput
+                type="text"
+                id="searchByTitle"
+                placeholder="¿Que estás buscando?"
+                onChange={async (event: any) => {
+                  setSearchKey(event.target.value);
+                  console.log(searchKey);
+                  return;
+                }}
+              />
+              <BtnSearch
+                type="button"
+                onClick={async () => {
+                  const response = await filterByTitle(sessionData, searchKey);
+                  if (response.data === null) {
+                    return;
+                  }
+                  setIsHidden(false);
+                  setBooks(await response);
 
-      <DivContainer>
+                  return;
+                }}
+              >
+                <i className="bi bi-search"></i>
+              </BtnSearch>
+            </MyForm>
+          </div>
+          <div>
+            <Button
+              type="button"
+              onClick={async () => {
+                setIsHidden(false);
+                const serverResponse = await getAllBooks(sessionData);
+                setBooks(serverResponse);
+              }}
+            >
+              Todos Los Libros
+            </Button>
+            <Button
+              type="button"
+              onClick={async () => {
+                setIsHidden(true);
+                const serverResponse = await getAllAuthor(sessionData);
+                setAuthors(serverResponse);
+              }}
+            >
+              Todos Los Autores
+            </Button>
+          </div>
+        </form>
+      </DivMainMenu>
+
+      <DivCardContainer>
         {books.map((book, index) => {
           return (
             <BookCardDiv key={index} hidden={isHidden}>
@@ -197,13 +238,13 @@ const MainContainer = () => {
             </BookCardDiv>
           );
         })}
-      </DivContainer>
+      </DivCardContainer>
       <AuthorListContainer>
         <AuthorListStyled hidden={!isHidden}>
           <AuthorList authors={authors} />
         </AuthorListStyled>
       </AuthorListContainer>
-    </div>
+    </DivMainContainer>
   );
 };
 

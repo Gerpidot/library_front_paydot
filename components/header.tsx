@@ -1,25 +1,22 @@
-import Image from "next/image";
+
 import {
-  DivContainer,
+  DivHeaderContainer,
   DivLogo,
-  DivVar,
-  HButton,
+  MyDivTest,
 } from "../styles/styled.header.module";
-//import logo from "../resources/logo.jpg";
-//<Image src={logo} alt="logo" width={100} height={150} />
+import logo from "../resources/BarjanLogo.png";
+
 const Header = ({ setCurrent }: any) => {
   return (
-    <div>
-      <DivContainer>
-        <DivLogo>
-          
-        </DivLogo>
+    <DivHeaderContainer>
+     
 
+      
         <div className="container">
-          <svg viewBox="0 0 960 300">
+          <svg viewBox="-50 50 960 250">
             <symbol id="s-text">
-              <text textAnchor="middle" x="50%" y="70%">
-                Biblioteca
+              <text textAnchor="middle" x="50%" y="90%">
+                BIBLIOTECA
               </text>
             </symbol>
 
@@ -32,27 +29,8 @@ const Header = ({ setCurrent }: any) => {
             </g>
           </svg>
         </div>
-      </DivContainer>
-
-      <DivVar>
-        <HButton
-          onClick={() => {
-            setCurrent(1);
-          }}
-        >
-          Iniciar Sesion
-        </HButton>
-        <HButton
-          onClick={() => {
-            setCurrent(0);
-          }}
-        >
-          Registrarse
-        </HButton>
-        <HButton>Contacto</HButton>
-        <HButton>Proyecto</HButton>
-      </DivVar>
-    </div>
+        
+    </DivHeaderContainer>
   );
 };
 
