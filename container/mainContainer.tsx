@@ -7,7 +7,7 @@ import {
   AuthorListContainer,
   AuthorListStyled,
 } from "../styles/styled.authorlist";
-
+import * as Astyled from "../styles/styled.authorlist"//importar stuilos como objeto
 import {
   filterByTitle,
   getAllAuthor,
@@ -59,84 +59,35 @@ const MainContainer = () => {
   ];
   const { sessionData, setSessionData }: any = useContext(SessionContext);
 
-  const [selected, setSelected] = useState(0);
+  // const [selected, setSelected] = useState(0);
   const [books, setBooks] = useState(mockData);
   const [authors, setAuthors] = useState(mockAuthor);
   const [isHidden, setIsHidden] = useState(false);
   const [searchKey, setSearchKey] = useState("");
   useEffect(() => {
+   
     //actualiza el valor de serachKEy
     //console.log(searchKey);
   }, [searchKey]);
-  /* const queries = {
-    "0": getAllBooks,
-    "1": getBookByID,
-    "2": getAllAuthor,
-    "3": getAuthorById,
-  };
-  let idInput: number;
-  let idSuspenso;
-  const argumentTransform = () => {
-    const querySelected = queries[selected + ""];
-*/
-  /*if (hidden() == true) {
-      console.log("idinput falsy");
-      return querySelected(sessionData);
-    } else if (hidden() == false && idInput) {
-      console.log("idinput true");
 
-      return querySelected(idInput, sessionData);
-    } else {
-      return;
-    }
-  };*/
-
-  /* const selectedQuery = async () => {
-    const selectedQuery = await argumentTransform();
-    const serverResponse = await selectedQuery;
-    if (!serverResponse) {
-      console.log("input id de selected query undefined");
-      return;
-    }
-    if (serverResponse.errors) {
-      console.log(serverResponse.errors);
-      return;
-    } else if (selected == 0 || selected == 1) {
-      setIsHidden(false);
-      setBooks(await serverResponse);
-      return;
-    } else {
-      setIsHidden(true);
-      setAuthors(await serverResponse);
-      return;
-    }
-  };*/
-  const available = (books: any) => {
-    const valor = books.isBorrowed ? "Prestado" : "Disponible";
+  const available = (book: Book) => {
+    const valor = book.isBorrowed ? "Prestado" : "Disponible";
 
     return valor;
   };
-  const putBookTookBook = async (books: Book) => {
-    const value = books.isBorrowed;
+  const putBookTookBook = async (book: Book) => {
+    const value = book.isBorrowed;
     if (!value) {
-      await tookOrPutAbook(sessionData, books, !value);
-     available(books.isBorrowed)
-     const serverResponse = await getAllBooks(sessionData);
-     setBooks(serverResponse);
-      //console.log("pedir libro", sessionData, books, value);
+      await tookOrPutAbook(sessionData, book, !value);
+      book.isBorrowed = !value;
+      setBooks([...books])
+      
     } else {
-      await tookOrPutAbook(sessionData, books, !value);
-      const serverResponse = await getAllBooks(sessionData);
-      setBooks(serverResponse);
-     // console.log("devolver libro", sessionData, books, value);
-    }
-    //selectedQuery(); Corregir acá
-  };
-  const hidden = () => {
-    if (selected == 0 || selected == 2) {
-      return true;
-    } else {
-      return false;
+      await tookOrPutAbook(sessionData, book, !value);
+      book.isBorrowed = !value;
+      setBooks([...books])
+     
+      
     }
   };
 
@@ -144,31 +95,6 @@ const MainContainer = () => {
     <DivMainContainer>
       <DivMainMenu>
         <form>
-          {/* <select
-            onChange={(event: any) => {
-              setSelected(event.target.value);
-            }}
-          >
-            <option value={0}>Buscar todos los libros</option>
-            <option value={1}>Buscar libro por su Id</option>
-            <option value={2}>Buscar todos los autores</option>
-            <option value={3}>Buscar autor por Id</option>
-          </select>
-          <div>
-            <input
-              id="inputId"
-              type="number"
-              min={1}
-              hidden={hidden()}
-              onChange={(event) => {
-                idSuspenso = event.target.value;
-                idInput = parseInt(idSuspenso);
-                console.log(idInput);
-              }}
-              placeholder="iD del Libro"
-              required
-            />
-            </div>*/}
           <div>
             <MyForm
               action="
@@ -180,7 +106,7 @@ const MainContainer = () => {
                 placeholder="¿Que estás buscando?"
                 onChange={async (event: any) => {
                   setSearchKey(event.target.value);
-                 // console.log(searchKey);
+                  // console.log(searchKey);
                   return;
                 }}
               />
@@ -259,3 +185,75 @@ export default withAuth(MainContainer);
     props: {  book: getallBooks },
   };
 }*/
+
+/********************************deprecated ***********************************/
+
+/* const queries = {
+    "0": getAllBooks,
+    "1": getBookByID,
+    "2": getAllAuthor,
+    "3": getAuthorById,
+  };
+  let idInput: number;
+  let idSuspenso;
+  const argumentTransform = () => {
+    const querySelected = queries[selected + ""];
+*/
+/*if (hidden() == true) {
+      console.log("idinput falsy");
+      return querySelected(sessionData);
+    } else if (hidden() == false && idInput) {
+      console.log("idinput true");
+
+      return querySelected(idInput, sessionData);
+    } else {
+      return;
+    }
+  };*/
+
+/* const selectedQuery = async () => {
+    const selectedQuery = await argumentTransform();
+    const serverResponse = await selectedQuery;
+    if (!serverResponse) {
+      console.log("input id de selected query undefined");
+      return;
+    }
+    if (serverResponse.errors) {
+      console.log(serverResponse.errors);
+      return;
+    } else if (selected == 0 || selected == 1) {
+      setIsHidden(false);
+      setBooks(await serverResponse);
+      return;
+    } else {
+      setIsHidden(true);
+      setAuthors(await serverResponse);
+      return;
+    }
+  };*/
+
+/* <select
+            onChange={(event: any) => {
+              setSelected(event.target.value);
+            }}
+          >
+            <option value={0}>Buscar todos los libros</option>
+            <option value={1}>Buscar libro por su Id</option>
+            <option value={2}>Buscar todos los autores</option>
+            <option value={3}>Buscar autor por Id</option>
+          </select>
+          <div>
+            <input
+              id="inputId"
+              type="number"
+              min={1}
+              hidden={hidden()}
+              onChange={(event) => {
+                idSuspenso = event.target.value;
+                idInput = parseInt(idSuspenso);
+                console.log(idInput);
+              }}
+              placeholder="iD del Libro"
+              required
+            />
+            </div>*/

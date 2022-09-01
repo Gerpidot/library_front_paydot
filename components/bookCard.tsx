@@ -1,6 +1,7 @@
 
 
 const BookCard = ({ book, available, putBookTookBook }: any) => {
+  
   return (
     <div>
       <h1>{book.title}</h1>

@@ -1,4 +1,3 @@
-//Hello
 import styled from "styled-components";
 
 export const Title = styled.h1`
@@ -31,6 +30,9 @@ export const FormReg = styled.form`
   border: 5px solid gray;
   border-radius: 10px;
   background-color: rgba(77, 22, 61, 0.936);
+  @media screen and (max-width: 500px) {
+    width: max-content;
+  }
 `;
 
 export const Input = styled.input`
@@ -98,17 +100,28 @@ export const Mydiv = styled.div`
   height: 400px;
   flex-wrap: wrap;
   align-content: flex-start;
+  @media (max-width: 500px) {
+    display: block;
+    height: auto;
+    width: 100%;
+  }
 `;
 //navBarIndext.tsx
 export const DivVar = styled.div`
   display: flex;
   flex-direction: column;
   height: 100%;
-  width: 190px;
+  width: 25%;
+  text-align: center;
   //background: rgba(9, 93, 89, 0.8);
   margin-top: 0px;
   padding: 0%;
   border-radius: 0px 0px 10px 0px;
+  @media (max-width: 500px) {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
 `;
 
 export const HButton = styled.button`
@@ -117,7 +130,7 @@ export const HButton = styled.button`
   //border-radius: 5px;
   margin: 0px;
   cursor: pointer;
-  width: 190px;
+  width: 100%;
   height: 80px;
   text-transform: uppercase;
   &:hover {
@@ -137,10 +150,16 @@ export const ContainerDiv = styled.div`
   justify-content: space-between;
   height: 450px;
   width: 100%;
+  @media (max-width: 500px) {
+    display: block;
+  }
 `;
 
 export const EmptyDivSeparator = styled.div`
   width: 190px;
   height: 100%;
   background: #fdb731;
+  @media (max-width: 500px) {
+    display: none;
+  }
 `;

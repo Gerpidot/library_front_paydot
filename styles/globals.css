@@ -1,19 +1,21 @@
 
 
 html,
+  
 body {
-  padding: 0;
-  margin: 0;
+  padding: auto;
+  margin: auto;
   font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
     background-image: linear-gradient(rgb(102, 102, 250), rgb(14, 54, 129));
-    background: url('../resources/background.jpg') no-repeat center center
-      fixed;
+    background: url('../resources/background.jpg')   no-repeat    center
+      ;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
     background-size: cover;
-    
+    ;
+   
 }
 
 a {
@@ -82,4 +84,5 @@ svg {
 
 @keyframes stroke-offset{
 	100% {stroke-dashoffset: -35%;}
+  
 }
