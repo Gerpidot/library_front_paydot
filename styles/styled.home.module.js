@@ -31,7 +31,7 @@ export const FormReg = styled.form`
   border-radius: 10px;
   background-color: rgba(77, 22, 61, 0.936);
   @media screen and (max-width: 500px) {
-    width: max-content;
+    width: 100%;
   }
 `;
 
@@ -152,7 +152,7 @@ export const ContainerDiv = styled.div`
   width: 100%;
   @media (max-width: 500px) {
     display: block;
-    width:max-content;
+    
   }
 `;
 

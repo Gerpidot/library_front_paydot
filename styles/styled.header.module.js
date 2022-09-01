@@ -9,7 +9,7 @@ export const Title = styled.h1`
 
 export const DivHeaderContainer = styled.div`
   display: flex;
-  font-size:150px ;
+  font-size:16vw;
   color:lightblue;
   font-family:'Courier New', Courier, monospace;
   align-items:center;
@@ -24,6 +24,7 @@ export const DivHeaderContainer = styled.div`
   @media (max-width: 500px) {
       //flex-direction: column;
     display:block;
+    
     }
 `;
 
