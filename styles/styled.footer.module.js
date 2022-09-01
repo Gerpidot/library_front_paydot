@@ -8,5 +8,6 @@ export const DivFooterContainer = styled.div`
   height: 124px;
   @media (max-width: 500px) {
     margin-top: 320px;
+    width:max-content;
   }
 `;

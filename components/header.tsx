@@ -1,18 +1,17 @@
 
 import {
   DivHeaderContainer,
-  DivLogo,
-  MyDivTest,
+  
+  
 } from "../styles/styled.header.module";
-import logo from "../resources/BarjanLogo.png";
 
-const Header = ({ setCurrent }: any) => {
+const Header = () => {
   return (
     <DivHeaderContainer>
      
 
-      
-        <div className="container">
+      Biblioteca
+        {/*<div className="container">
           <svg viewBox="-50 50 960 250">
             <symbol id="s-text">
               <text textAnchor="middle" x="50%" y="90%">
@@ -28,7 +27,7 @@ const Header = ({ setCurrent }: any) => {
               <use xlinkHref="#s-text" className="text-copy"></use>
             </g>
           </svg>
-        </div>
+        </div>*/}
         
     </DivHeaderContainer>
   );

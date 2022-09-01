@@ -128,7 +128,7 @@ export const HButton = styled.button`
   background: #fdb731;
   border: 1px #fdb731 solid;
   //border-radius: 5px;
-  margin: 0px;
+  margin-top: 5px;
   cursor: pointer;
   width: 100%;
   height: 80px;
@@ -152,6 +152,7 @@ export const ContainerDiv = styled.div`
   width: 100%;
   @media (max-width: 500px) {
     display: block;
+    width:max-content;
   }
 `;
 
