@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-"dev":"next dev",
+    "dev":"next dev"
   },
   "dependencies": {
     "bootstrap-icons": "^1.9.1",
